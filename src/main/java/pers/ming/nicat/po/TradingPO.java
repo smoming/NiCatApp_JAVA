@@ -8,7 +8,7 @@ public class TradingPO {
 	private Date TradeDate;
 	private String Buyer;
 	private String CommodityID;
-	private String SupperNo;
+	private String ShipperNo;
 	private BigDecimal TradeQuantity;
 	private BigDecimal TradeAmount;
 	private String Remark;
@@ -45,12 +45,12 @@ public class TradingPO {
 		CommodityID = commodityID;
 	}
 
-	public String getSupperNo() {
-		return SupperNo;
+	public String getShipperNo() {
+		return ShipperNo;
 	}
 
-	public void setSupperNo(String supperNo) {
-		SupperNo = supperNo;
+	public void setShipperNo(String shipperNo) {
+		ShipperNo = shipperNo;
 	}
 
 	public BigDecimal getTradeQuantity() {

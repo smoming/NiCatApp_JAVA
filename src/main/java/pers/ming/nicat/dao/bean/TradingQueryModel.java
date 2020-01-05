@@ -1,6 +1,5 @@
 package pers.ming.nicat.dao.bean;
 
-import java.util.ArrayList;
 import java.util.Date;
 
 import org.springframework.lang.Nullable;
@@ -14,12 +13,12 @@ public class TradingQueryModel {
 	private String Buyer;
 	@Nullable
 	private String CommodityID;
-	@Nullable
-	private ArrayList<String> TransNos;
-	@Nullable
-	private Boolean IsShipped;
-	@Nullable
-	private String ShipperNo;
+//	@Nullable
+//	private ArrayList<String> TransNos;
+//	@Nullable
+//	private Boolean IsShipped;
+//	@Nullable
+//	private String ShipperNo;
 
 	public Date getTradeDate_S() {
 		return TradeDate_S;
@@ -53,28 +52,28 @@ public class TradingQueryModel {
 		CommodityID = commodityID;
 	}
 
-	public ArrayList<String> getTransNos() {
-		return TransNos;
-	}
-
-	public void setTransNos(ArrayList<String> transNos) {
-		TransNos = transNos;
-	}
-
-	public Boolean getIsShipped() {
-		return IsShipped;
-	}
-
-	public void setIsShipped(Boolean isShipped) {
-		IsShipped = isShipped;
-	}
-
-	public String getShipperNo() {
-		return ShipperNo;
-	}
-
-	public void setShipperNo(String shipperNo) {
-		ShipperNo = shipperNo;
-	}
+//	public ArrayList<String> getTransNos() {
+//		return TransNos;
+//	}
+//
+//	public void setTransNos(ArrayList<String> transNos) {
+//		TransNos = transNos;
+//	}
+//
+//	public Boolean getIsShipped() {
+//		return IsShipped;
+//	}
+//
+//	public void setIsShipped(Boolean isShipped) {
+//		IsShipped = isShipped;
+//	}
+//
+//	public String getShipperNo() {
+//		return ShipperNo;
+//	}
+//
+//	public void setShipperNo(String shipperNo) {
+//		ShipperNo = shipperNo;
+//	}
 
 }

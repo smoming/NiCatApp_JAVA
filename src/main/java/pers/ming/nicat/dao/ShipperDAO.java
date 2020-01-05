@@ -11,7 +11,7 @@ public interface ShipperDAO extends RowMapper<ShipperPO> {
 
 	ShipperPO GET(String id);
 
-	String ADD(ShipperPO item);
+	String ADD(String[] transnos);
 
 	String UPDATE(ShipperPO item);
 

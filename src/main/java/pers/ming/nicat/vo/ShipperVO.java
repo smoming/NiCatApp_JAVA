@@ -8,19 +8,19 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import pers.ming.nicat.po.ShipperPO;
 
 public class ShipperVO {
-	@JsonProperty("trans_no")
+	@JsonProperty("TransNo")
 	private String TransNo;
-	@JsonProperty("tradedate")
+	@JsonProperty("TradeDate")
 	private Date TradeDate;
-	@JsonProperty("buyer")
+	@JsonProperty("Buyer")
 	private String Buyer;
-	@JsonProperty("tradeamount")
+	@JsonProperty("TradeAmount")
 	private BigDecimal TradeAmount;
-	@JsonProperty("fee")
+	@JsonProperty("Fee")
 	private BigDecimal Fee;
-	@JsonProperty("delivery")
+	@JsonProperty("Delivery")
 	private String Delivery;
-	@JsonProperty("remark")
+	@JsonProperty("Remark")
 	private String Remark;
 
 	public String getTransNo() {
@@ -80,10 +80,26 @@ public class ShipperVO {
 	}
 
 	public static ShipperVO toVO(ShipperPO po) {
-		return null;
+		ShipperVO vo = new ShipperVO();
+		vo.setTransNo(po.getTransNo());
+		vo.setTradeDate(po.getTradeDate());
+		vo.setBuyer(po.getBuyer());
+		vo.setTradeAmount(po.getTradeAmount());
+		vo.setDelivery(po.getDelivery());
+		vo.setFee(po.getFee());
+		vo.setRemark(po.getRemark());
+		return vo;
 	}
 
 	public static ShipperPO toPO(ShipperVO vo) {
-		return null;
+		ShipperPO po = new ShipperPO();
+		po.setTransNo(vo.getTransNo());
+		po.setTradeDate(vo.getTradeDate());
+		po.setBuyer(vo.getBuyer());
+		po.setTradeAmount(vo.getTradeAmount());
+		po.setDelivery(vo.getDelivery());
+		po.setFee(vo.getFee());
+		po.setRemark(vo.getRemark());
+		return po;
 	}
 }

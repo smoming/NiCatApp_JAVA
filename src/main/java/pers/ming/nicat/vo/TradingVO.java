@@ -8,21 +8,21 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import pers.ming.nicat.po.TradingPO;
 
 public class TradingVO {
-	@JsonProperty("trans_no")
+	@JsonProperty("TransNo")
 	private String TransNo;
-	@JsonProperty("tradedate")
+	@JsonProperty("TradeDate")
 	private Date TradeDate;
-	@JsonProperty("buyer")
+	@JsonProperty("Buyer")
 	private String Buyer;
-	@JsonProperty("commodity_id")
+	@JsonProperty("CommodityID")
 	private String CommodityID;
-	@JsonProperty("supper_no")
-	private String SupperNo;
-	@JsonProperty("tradequantity")
+	@JsonProperty("TradeQuantity")
 	private BigDecimal TradeQuantity;
-	@JsonProperty("tradeamount")
+	@JsonProperty("TradeAmount")
 	private BigDecimal TradeAmount;
-	@JsonProperty("remark")
+	@JsonProperty("ShipperNo")
+	private String ShipperNo;
+	@JsonProperty("Remark")
 	private String Remark;
 
 	public String getTransNo() {
@@ -57,12 +57,12 @@ public class TradingVO {
 		CommodityID = commodityID;
 	}
 
-	public String getSupperNo() {
-		return SupperNo;
+	public String getShipperNo() {
+		return ShipperNo;
 	}
 
-	public void setSupperNo(String supperNo) {
-		SupperNo = supperNo;
+	public void setShipperNo(String shipperNo) {
+		ShipperNo = shipperNo;
 	}
 
 	public BigDecimal getTradeQuantity() {
@@ -90,11 +90,29 @@ public class TradingVO {
 	}
 
 	public static TradingPO toPO(TradingVO vo) {
-		return null;
+		TradingPO po = new TradingPO();
+		po.setTransNo(vo.getTransNo());
+		po.setTradeDate(vo.getTradeDate());
+		po.setBuyer(vo.getBuyer());
+		po.setCommodityID(vo.getCommodityID());
+		po.setTradeQuantity(vo.getTradeQuantity());
+		po.setTradeAmount(vo.getTradeAmount());
+		po.setShipperNo(vo.getShipperNo());
+		po.setRemark(vo.getRemark());
+		return po;
 	}
 
 	public static TradingVO toVO(TradingPO po) {
-		return null;
+		TradingVO vo = new TradingVO();
+		vo.setTransNo(po.getTransNo());
+		vo.setTradeDate(po.getTradeDate());
+		vo.setBuyer(po.getBuyer());
+		vo.setCommodityID(po.getCommodityID());
+		vo.setTradeQuantity(po.getTradeQuantity());
+		vo.setTradeAmount(po.getTradeAmount());
+		vo.setShipperNo(po.getShipperNo());
+		vo.setRemark(po.getRemark());
+		return vo;
 
 	}
 }

@@ -18,11 +18,12 @@ import pers.ming.nicat.util.ResultSetUtil;
 @Service
 public class TradingDaoImpl extends SqlCommandExecutor implements TradingDAO {
 
-	private final String SP_LIST = "SP_TRADING_LIST(?,?,?,?,?,?,?)";
+	private final String SP_LIST = "SP_TRADING_LIST(?,?,?,?)";
 	private final String SP_GET = "SP_TRADING_GET(?)";
 	private final String SP_ADD = "SP_TRADING_ADD(?,?,?,?,?,?,?)";
 	private final String SP_UPDATE = "SP_TRADING_UPDATE(?,?,?,?,?,?,?,?)";
 	private final String SP_DELETE = "SP_TRADING_DELETE(?)";
+	private final String SP_UNSHIPPED = "SP_TRADING_UNSHIPPED(?)";
 
 	@Override
 	public TradingPO rowMapper(ResultSet rs) {
@@ -31,10 +32,10 @@ public class TradingDaoImpl extends SqlCommandExecutor implements TradingDAO {
 			po.setTransNo(rs.getString("TRANSNO"));
 			po.setTradeDate(rs.getDate("TRADEDATE"));
 			po.setBuyer(rs.getString("BUYER"));
-			po.setRemark(rs.getString("COMMODITYID"));
+			po.setCommodityID(rs.getString("COMMODITYID"));
 			po.setTradeQuantity(rs.getBigDecimal("TRADEQUANTITY"));
 			po.setTradeAmount(rs.getBigDecimal("TRADEAMOUNT"));
-			po.setSupperNo(rs.getString("SUIPPERNO"));
+			po.setShipperNo(rs.getString("SHIPPERNO"));
 			po.setRemark(rs.getString("REMARK"));
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -62,9 +63,9 @@ public class TradingDaoImpl extends SqlCommandExecutor implements TradingDAO {
 		in.put("i_TradeDate_E", filter.getTradeDate_E());
 		in.put("i_Buyer", filter.getBuyer());
 		in.put("i_CommodityID", filter.getCommodityID());
-		in.put("i_TransNos", filter.getTransNos());
-		in.put("i_IsShipped", filter.getIsShipped());
-		in.put("i_ShipperNo", filter.getShipperNo());
+//		in.put("i_TransNos", filter.getTransNos());
+//		in.put("i_IsShipped", filter.getIsShipped());
+//		in.put("i_ShipperNo", filter.getShipperNo());
 		return in;
 	}
 
@@ -93,7 +94,7 @@ public class TradingDaoImpl extends SqlCommandExecutor implements TradingDAO {
 		in.put("i_COMMODITYID", item.getCommodityID());
 		in.put("i_TRADEQUANTITY", item.getTradeQuantity());
 		in.put("i_TRADEAMOUNT", item.getTradeAmount());
-		in.put("i_SUIPPERNO", item.getSupperNo());
+		in.put("i_SHIPPERNO", item.getShipperNo());
 		in.put("i_REMARK", item.getRemark());
 		return Save(SaveAction.Added, SP_ADD, in);
 	}
@@ -107,7 +108,7 @@ public class TradingDaoImpl extends SqlCommandExecutor implements TradingDAO {
 		in.put("i_COMMODITYID", item.getCommodityID());
 		in.put("i_TRADEQUANTITY", item.getTradeQuantity());
 		in.put("i_TRADEAMOUNT", item.getTradeAmount());
-		in.put("i_SUIPPERNO", item.getSupperNo());
+		in.put("i_SHIPPERNO", item.getShipperNo());
 		in.put("i_REMARK", item.getRemark());
 		return Save(SaveAction.Modified, SP_UPDATE, in);
 	}
@@ -117,6 +118,22 @@ public class TradingDaoImpl extends SqlCommandExecutor implements TradingDAO {
 		HashMap<String, Object> in = new HashMap<String, Object>();
 		in.put("i_TRANSNO", transNo);
 		return Save(SaveAction.Deleted, SP_DELETE, in);
+	}
+
+	@Override
+	public ArrayList<TradingPO> UNSHIPPED(String buyer) {
+		HashMap<String, Object> in = new HashMap<String, Object>();
+		in.put("i_BUYER", buyer);
+		try {
+			rSet = executeQuery(SP_UNSHIPPED, in);
+			return ResultSetUtil.doRowMapper(rSet, this);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			releaseResources();
+		}
+
+		return null;
 	}
 
 }

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
 import org.springframework.lang.Nullable;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -31,11 +32,13 @@ public class ShipperController {
 	private ShipperDaoImpl dao;
 
 	@GetMapping
-	public ResponseEntity<ArrayList<ShipperVO>> list(@RequestParam @Nullable Date StartDate,
-			@RequestParam @Nullable Date EndDate, @RequestParam @Nullable String Buyer) {
+	public ResponseEntity<ArrayList<ShipperVO>> list(
+			@RequestParam("StartDate") @Nullable @DateTimeFormat(pattern = "yyyy-MM-dd") Date xStartDate,
+			@RequestParam("EndDate") @Nullable @DateTimeFormat(pattern = "yyyy-MM-dd") Date xEndDate,
+			@RequestParam("Buyer") @Nullable String Buyer) {
 		ShipperQueryModel filter = new ShipperQueryModel();
-		filter.setTradeDate_S(StartDate);
-		filter.setTradeDate_E(EndDate);
+		filter.setTradeDate_S(xStartDate);
+		filter.setTradeDate_E(xEndDate);
 		filter.setBuyer(Buyer);
 		return ResponseEntity.ok(ListUtil.ToArrayList(dao.LIST(filter).stream().map(po -> ShipperVO.toVO(po))));
 	}
@@ -46,17 +49,17 @@ public class ShipperController {
 	}
 
 	@PostMapping
-	public String add(@RequestBody ShipperVO shipper) {
-		return dao.ADD(ShipperVO.toPO(shipper));
+	public String add(@RequestBody String[] transnos) {
+		return dao.ADD(transnos);
 	}
 
-	@PutMapping
-	public String update(@RequestBody ShipperVO shipper) {
-		return dao.UPDATE(ShipperVO.toPO(shipper));
+	@PutMapping("/{TransNo}")
+	public String update(@PathVariable("TransNo") String xTransNo, @RequestBody ShipperVO trading) {
+		return dao.UPDATE(ShipperVO.toPO(trading));
 	}
 
-	@DeleteMapping("/{id}")
-	public String delete(@PathVariable("id") String id) {
-		return dao.DELETE(id);
+	@DeleteMapping("/{TransNo}")
+	public String delete(@PathVariable("TransNo") String xTransNo) {
+		return dao.DELETE(xTransNo);
 	}
 }

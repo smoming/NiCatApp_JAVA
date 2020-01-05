@@ -9,6 +9,8 @@ public interface TradingDAO extends RowMapper<TradingPO> {
 
 	ArrayList<TradingPO> LIST(TradingQueryModel filter);
 
+	ArrayList<TradingPO> UNSHIPPED(String buyer);
+
 	TradingPO GET(String id);
 
 	String ADD(TradingPO item);
@@ -16,4 +18,5 @@ public interface TradingDAO extends RowMapper<TradingPO> {
 	String UPDATE(TradingPO item);
 
 	String DELETE(String transNo);
+
 }

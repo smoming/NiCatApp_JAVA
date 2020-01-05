@@ -35,7 +35,7 @@ public class TradingController {
 	public ResponseEntity<ArrayList<TradingVO>> list(
 			@RequestParam("StartDate") @Nullable @DateTimeFormat(pattern = "yyyy-MM-dd") Date xStartDate,
 			@RequestParam("EndDate") @Nullable @DateTimeFormat(pattern = "yyyy-MM-dd") Date xEndDate,
-			@RequestParam @Nullable String Buyer, @RequestParam @Nullable String CommodityID) {
+			@RequestParam("Buyer") @Nullable String Buyer, @RequestParam("CommodityID") @Nullable String CommodityID) {
 		TradingQueryModel filter = new TradingQueryModel();
 		filter.setTradeDate_S(xStartDate);
 		filter.setTradeDate_E(xEndDate);
@@ -45,11 +45,8 @@ public class TradingController {
 	}
 
 	@GetMapping("GetUnShipped")
-	public ResponseEntity<ArrayList<TradingVO>> unShipped(@RequestParam @Nullable String Buyer) {
-		TradingQueryModel filter = new TradingQueryModel();
-		filter.setBuyer(Buyer);
-		filter.setIsShipped(false);
-		return ResponseEntity.ok(ListUtil.ToArrayList(dao.LIST(filter).stream().map(po -> TradingVO.toVO(po))));
+	public ResponseEntity<ArrayList<TradingVO>> unShipped(@RequestParam("Buyer") @Nullable String Buyer) {
+		return ResponseEntity.ok(ListUtil.ToArrayList(dao.UNSHIPPED(Buyer).stream().map(po -> TradingVO.toVO(po))));
 	}
 
 	@GetMapping("/{id}")
@@ -62,13 +59,13 @@ public class TradingController {
 		return dao.ADD(TradingVO.toPO(trading));
 	}
 
-	@PutMapping
-	public String update(@RequestBody TradingVO trading) {
+	@PutMapping("/{TransNo}")
+	public String update(@PathVariable("TransNo") String xTransNo, @RequestBody TradingVO trading) {
 		return dao.UPDATE(TradingVO.toPO(trading));
 	}
 
-	@DeleteMapping("/{id}")
-	public String delete(@PathVariable("id") String id) {
-		return dao.DELETE(id);
+	@DeleteMapping("/{TransNo}")
+	public String delete(@PathVariable("TransNo") String xTransNo) {
+		return dao.DELETE(xTransNo);
 	}
 }

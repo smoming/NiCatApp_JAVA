@@ -20,7 +20,7 @@ public class ShipperDaoImpl extends SqlCommandExecutor implements ShipperDAO {
 
 	private final String SP_LIST = "SP_SHIPPER_LIST(?,?,?)";
 	private final String SP_GET = "SP_SHIPPER_GET(?)";
-	private final String SP_ADD = "SP_SHIPPER_ADD(?,?,?,?,?,?)";
+	private final String SP_ADD = "SP_SHIPPER_ADD(?)";
 	private final String SP_UPDATE = "SP_SHIPPER_UPDATE(?,?,?,?,?,?,?)";
 	private final String SP_DELETE = "SP_SHIPPER_DELETE(?)";
 
@@ -80,15 +80,9 @@ public class ShipperDaoImpl extends SqlCommandExecutor implements ShipperDAO {
 	}
 
 	@Override
-	public String ADD(ShipperPO item) {
+	public String ADD(String[] transnos) {
 		HashMap<String, Object> in = new HashMap<String, Object>();
-//		in.put("i_TRANSNO", item.getTransNo());
-		in.put("i_TRADEDATE", item.getTradeDate());
-		in.put("i_BUYER", item.getBuyer());
-		in.put("i_TRADEAMOUNT", item.getTradeAmount());
-		in.put("i_FEE", item.getFee());
-		in.put("i_DELIVERY", item.getDelivery());
-		in.put("i_REMARK", item.getRemark());
+		in.put("i_TradingNos", String.join(",", transnos));
 		return Save(SaveAction.Added, SP_ADD, in);
 	}
 
