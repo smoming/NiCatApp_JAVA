@@ -1,2 +1,2 @@
 # NiCatApp_JAVA
-Java
+NiCatApp API Server JAVA Version
