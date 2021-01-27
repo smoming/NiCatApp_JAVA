@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import pers.ming.nicat.dao.bean.OrderQueryModel;
 import pers.ming.nicat.dao.impl.OrderDaoImpl;
+import pers.ming.nicat.po.OrderPO;
 import pers.ming.nicat.util.ListUtil;
 import pers.ming.nicat.vo.OrderVO;
 
@@ -42,6 +43,20 @@ public class OrderController {
 		filter.setCommodityID(xCommodityID);
 		filter.setReceiptNo(xReceiptNo);
 		return ResponseEntity.ok(ListUtil.ToArrayList(dao.LIST(filter).stream().map(po -> OrderVO.toVO(po))));
+	}
+
+	@GetMapping("HavingReceipt")
+	public ResponseEntity<ArrayList<OrderVO>> list(@RequestParam("ReceiptNo") String xReceiptNo) {
+		OrderQueryModel filter = new OrderQueryModel();
+		filter.setTradeDate_S(null);
+		filter.setTradeDate_E(null);
+		filter.setCommodityID(null);
+		filter.setReceiptNo(xReceiptNo);
+		ArrayList<OrderPO> result = dao.LIST(filter);
+		if (result == null)
+			return ResponseEntity.ok(new ArrayList<OrderVO>());
+
+		return ResponseEntity.ok(ListUtil.ToArrayList(result.stream().map(po -> OrderVO.toVO(po))));
 	}
 
 	@GetMapping("GetUnPaid")
