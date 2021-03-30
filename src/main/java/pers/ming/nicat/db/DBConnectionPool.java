@@ -42,10 +42,20 @@ public class DBConnectionPool implements ConnectionPool {
 	}
 
 	private Connection createConnction() throws SQLException {
-		Properties props = getProperties();
-		POOL_MAX_SIZE = Integer.parseInt(PropertiesUtil.getValue(props, "mysql.pool-max-size"));
-		return DriverManager.getConnection(PropertiesUtil.getValue(props, "mysql.url"),
-				PropertiesUtil.getValue(props, "mysql.username"), PropertiesUtil.getValue(props, "mysql.password"));
+		try {
+			Properties props = getProperties();
+			Class.forName("com.mysql.jdbc.Driver");
+			POOL_MAX_SIZE = Integer.parseInt(PropertiesUtil.getValue(props, "mysql.pool-max-size"));
+			return DriverManager.getConnection(PropertiesUtil.getValue(props, "mysql.url"),
+					PropertiesUtil.getValue(props, "mysql.username"), PropertiesUtil.getValue(props, "mysql.password"));
+		} catch (SQLException e) {
+			// TODO: handle exception
+			throw e;
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
 	}
 
 	private Properties getProperties() {
