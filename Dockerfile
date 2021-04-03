@@ -4,7 +4,7 @@ COPY pom.xml /build/
 COPY src /build/src/
 
 WORKDIR /build/
-RUN mvn package -Dmaven.test.skip=true
+RUN mvn package spring.profiles.active=docker -Dmaven.test.skip=true
 
 FROM openjdk:8-jdk-alpine
 

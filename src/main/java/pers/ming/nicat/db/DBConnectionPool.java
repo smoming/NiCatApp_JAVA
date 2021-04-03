@@ -13,7 +13,7 @@ import pers.ming.nicat.util.ObjectUtil;
 import pers.ming.nicat.util.PropertiesUtil;
 
 public class DBConnectionPool implements ConnectionPool {
-	private final String dbConfigFileName = "DbConfig.properties";
+	private final String dbConfigFileName = "application.properties";
 	private int POOL_MAX_SIZE; // 連接池中最大Connection數目
 	private List<Connection> pool;
 

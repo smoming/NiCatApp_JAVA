@@ -1,0 +1,27 @@
+{"properties": [
+  {
+    "name": "mysql.driver-class-name",
+    "type": "java.lang.String",
+    "description": "A description for 'mysql.driver-class-name'"
+  },
+  {
+    "name": "mysql.url",
+    "type": "java.lang.String",
+    "description": "A description for 'mysql.url'"
+  },
+  {
+    "name": "mysql.username",
+    "type": "java.lang.String",
+    "description": "A description for 'mysql.username'"
+  },
+  {
+    "name": "mysql.password",
+    "type": "java.lang.String",
+    "description": "A description for 'mysql.password'"
+  },
+  {
+    "name": "mysql.pool-max-size",
+    "type": "java.lang.String",
+    "description": "A description for 'mysql.pool-max-size'"
+  }
+]}
